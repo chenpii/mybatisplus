@@ -9,3 +9,8 @@ spring:
     url: jdbc:mysql://172.16.5.203:3306/mybatis_plus?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
     username: root
     password: 'Mysql300654=-=3K4i%$'
+
+# 加入日志功能
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
