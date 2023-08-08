@@ -6,7 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 public class MyBatisPlusTest {
@@ -34,4 +37,27 @@ public class MyBatisPlusTest {
         System.out.println("id:" + user.getId()); //在mybatisplus中，默认用的雪花算法生成的id
     }
 
+    @Test
+    public void testDeleteById() {
+        // 通过id删除用户信息
+        // DELETE FROM user WHERE id=?
+        /* int result = userMapper.deleteById(1688736262360948738L);
+        System.out.println("result:" + result); */
+
+        // 根据map集合中所设置的条件删除用户信息
+        // DELETE FROM user WHERE name = ? AND age = ?
+        /*Map<String, Object> hashMap = new HashMap<>();
+        hashMap.put("name", "张三");
+        hashMap.put("age", 34);
+        int result = userMapper.deleteByMap(hashMap);
+        System.out.println("result:" + result);*/
+
+        // 通过多个id实现批量删除
+        // DELETE FROM user WHERE id IN ( ? , ? , ? )
+        List<Long> idList = Arrays.asList(1L, 2L, 3L);
+        int result = userMapper.deleteBatchIds(idList);
+        System.out.println("result:" + result);
+
+
+    }
 }
