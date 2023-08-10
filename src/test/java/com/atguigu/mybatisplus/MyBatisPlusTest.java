@@ -34,7 +34,7 @@ public class MyBatisPlusTest {
         user.setEmail("zhangsan@mail.com");
         int result = userMapper.insert(user);
         System.out.println("result:" + result);
-        System.out.println("id:" + user.getId()); //在mybatisplus中，默认用的雪花算法生成的id
+        System.out.println("id:" + user.getUid()); //在mybatisplus中，默认用的雪花算法生成的id
     }
 
     @Test
@@ -66,7 +66,7 @@ public class MyBatisPlusTest {
         // 修改用户信息
         // UPDATE user SET name=?, email=? WHERE id=?
         User user = new User();
-        user.setId(4L);
+        user.setUid(4L);
         user.setName("李四");
         user.setEmail("lisi@atguigu.com");
         int result = userMapper.updateById(user);
