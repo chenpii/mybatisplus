@@ -37,4 +37,13 @@ public class MybatisPlusWrapperTest {
         List<User> users = userMapper.selectList(userQueryWrapper);
         users.forEach(System.out::println);
     }
+
+    @Test
+    public void test03() {
+        // 删除邮箱地址为NULL的用户信息
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.isNull("email");
+        int result = userMapper.delete(userQueryWrapper); //逻辑删除
+        System.out.println("result:" + result);
+    }
 }

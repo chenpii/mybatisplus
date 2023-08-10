@@ -1,6 +1,7 @@
 package com.atguigu.mybatisplus.mapper;
 
 import com.atguigu.mybatisplus.bean.User;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.Map;
@@ -14,4 +15,5 @@ public interface UserMapper extends BaseMapper<User> {
      */
     Map<String, Object> selectMapById(Long id);
 
+    void update(QueryWrapper<User> userQueryWrapper);
 }
