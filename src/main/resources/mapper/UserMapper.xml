@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace="com.b0.mybatis.mapper.UserMapper" -->
+<mapper namespace="com.atguigu.mybatisplus.mapper.UserMapper">
+
+    <!--Map<String, Object> selectMapById(Long id);-->
+    <select id="selectMapById" resultType="map">
+        select id,name,age,email
+        from user
+        where id = #{id}
+    </select>
+</mapper>
