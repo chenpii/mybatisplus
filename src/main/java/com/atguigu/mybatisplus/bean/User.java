@@ -1,6 +1,7 @@
 package com.atguigu.mybatisplus.bean;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,9 @@ public class User {
     // @TableId(value = "uid", type = IdType.AUTO)
     @TableId("uid")
     private Long id;
+
+    // 指定属性对应的普通字段名
+    @TableField("user_name")
     private String name;
     private Integer age;
     private String email;
