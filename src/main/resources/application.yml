@@ -13,4 +13,10 @@ spring:
 # 加入日志功能
 mybatis-plus:
   configuration:
+    # 配置MyBatis日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  # 设置MyBatis-Plus的全局配置
+  global-config:
+    db-config:
+      # 来设置实体类对应表的统一前缀
+      table-prefix: t_
