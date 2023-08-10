@@ -19,7 +19,8 @@ public class User {
     // @TableId注解的type属性，用于指定主键生成策略。
     //      IdType.AUTO     数据库的自增策略，需要确保数据库设置id自增
     //      默认为雪花算法生成
-    @TableId(value = "uid", type = IdType.AUTO)
+    // @TableId(value = "uid", type = IdType.AUTO)
+    @TableId("uid")
     private Long id;
     private String name;
     private Integer age;
