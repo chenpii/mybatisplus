@@ -11,3 +11,4 @@ CREATE TABLE `t_user` (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 ALTER TABLE mybatis_plus.t_user MODIFY COLUMN uid bigint auto_increment NOT NULL COMMENT '主键ID';
+ALTER TABLE mybatis_plus.t_user ADD is_deleted INT DEFAULT 0 NULL;
