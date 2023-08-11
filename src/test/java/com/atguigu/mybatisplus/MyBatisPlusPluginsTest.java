@@ -18,6 +18,10 @@ public class MyBatisPlusPluginsTest {
     public void testPage() {
         Page<User> page = new Page<>(1, 3);
         Page<User> userPage = userMapper.selectPage(page, null);
-        System.out.println(userPage);
+        System.out.println(userPage.getRecords()); //当前页的记录列表
+        System.out.println(userPage.getPages()); //总页数
+        System.out.println(userPage.getTotal()); //总记录数
+        System.out.println(userPage.hasNext()); //是否有下一页
+        System.out.println(userPage.hasPrevious()); //是否有上一页
     }
 }
