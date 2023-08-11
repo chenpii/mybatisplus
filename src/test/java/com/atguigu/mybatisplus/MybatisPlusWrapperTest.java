@@ -4,6 +4,7 @@ import com.atguigu.mybatisplus.bean.User;
 import com.atguigu.mybatisplus.mapper.UserMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.junit.jupiter.api.Test;
@@ -192,5 +193,24 @@ public class MybatisPlusWrapperTest {
 
         List<User> userList = userMapper.selectList(lambdaQueryWrapper);
         userList.forEach(System.out::println);
+    }
+
+    /**
+     * LambdaUpdateWrapper
+     * 避免字段写错
+     */
+    @Test
+    public void test12() {
+        // 将用户名中包含a并且(年龄大于20或邮箱为null)的用户信息修改
+        LambdaUpdateWrapper<User> lambdaUpdateWrapper = new LambdaUpdateWrapper<>();
+        lambdaUpdateWrapper.like(User::getName, "a")
+                .and(i -> i.gt(User::getAge, 20)
+                        .or()
+                        .isNull(User::getEmail)
+                );//修改的条件
+
+        lambdaUpdateWrapper.set(User::getName, "小兰").set(User::getEmail, "test08@atguigu.com");//修改的值
+        int result = userMapper.update(null, lambdaUpdateWrapper);
+        System.out.println("result:" + result);
     }
 }
