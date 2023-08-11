@@ -97,4 +97,17 @@ public class MybatisPlusWrapperTest {
         mapList.forEach(System.out::println);
     }
 
+    /**
+     * 组装子查询 查询id小于100的用户信息
+     **/
+    @Test
+    public void test07() {
+        // 查询id小于100的用户信息
+        // SELECT uid AS id,user_name AS name,age,email,is_deleted FROM t_user
+        // WHERE is_deleted=0 AND (uid IN (select uid from t_user where uid < 100))
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.inSql("uid", "select uid from t_user where uid < 100");
+        List<User> users = userMapper.selectList(userQueryWrapper);
+        users.forEach(System.out::println);
+    }
 }
