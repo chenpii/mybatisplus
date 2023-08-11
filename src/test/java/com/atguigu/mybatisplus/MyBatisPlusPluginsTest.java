@@ -56,7 +56,13 @@ public class MyBatisPlusPluginsTest {
         productMapper.updateById(productLi);
         // 4.小王将商品价格-30
         productWang.setPrice(productWang.getPrice() - 30);
-        productMapper.updateById(productWang);
+        int result = productMapper.updateById(productWang);
+        if (result == 0) {
+            // 修改失败，重试
+            productWang = productMapper.selectById(1);
+            productWang.setPrice(productWang.getPrice() - 30);
+            productMapper.updateById(productWang);
+        }
         // 5.老板查询商品价格
         Product productLB = productMapper.selectById(1);
         System.out.println("老板查询的价格：" + productLB.getPrice());
