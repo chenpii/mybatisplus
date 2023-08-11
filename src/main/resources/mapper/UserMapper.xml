@@ -14,9 +14,12 @@
 
     <!--Page<User> selectPageVo(@Param("page") Page<User> page, @Param("age") Integer age);-->
     <select id="selectPageVo" resultType="User">
-        select uid,user_name,age,email
+        select uid as id ,user_name as name,age,email,is_deleted as isDeleted
         from t_user
-        where age > #{age}
+        where
+        is_deleted = 0
+        and
+        age > #{age}
     </select>
 
 </mapper>
