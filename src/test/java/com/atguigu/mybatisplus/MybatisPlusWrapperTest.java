@@ -46,4 +46,21 @@ public class MybatisPlusWrapperTest {
         int result = userMapper.delete(userQueryWrapper); //逻辑删除
         System.out.println("result:" + result);
     }
+
+    @Test
+    public void test04() {
+        // 组装修改条件  将(年龄大于20并且用户名中包含有a)或邮箱为null的用户信息修改
+        // UPDATE t_user SET user_name=?, email=? WHERE is_deleted=0 AND (age > ? AND user_name LIKE ? OR email IS NULL)
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.gt("age", 20)
+                .like("user_name", "a")
+                .or()
+                .isNull("email");
+        User user = new User();
+        user.setName("小明");
+        user.setEmail("test@atguigu.com");
+        int result = userMapper.update(user, userQueryWrapper);//第一个实体类参数：用于填充修改的内容；第二个条件构造器参数：用于设置修改的条件
+        System.out.println("result:" + result);
+
+    }
 }
