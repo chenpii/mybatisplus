@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 public class MybatisPlusWrapperTest {
@@ -86,5 +87,14 @@ public class MybatisPlusWrapperTest {
         System.out.println("result:" + result);
     }
 
+    @Test
+    public void test06() {
+        // 查询用户的姓名、年龄、邮箱信息
+        // SELECT user_name,age,email FROM t_user WHERE is_deleted=0
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.select("user_name", "age", "email");
+        List<Map<String, Object>> mapList = userMapper.selectMaps(userQueryWrapper);
+        mapList.forEach(System.out::println);
+    }
 
 }
