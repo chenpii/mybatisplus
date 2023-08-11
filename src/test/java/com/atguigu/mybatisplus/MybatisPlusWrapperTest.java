@@ -2,6 +2,7 @@ package com.atguigu.mybatisplus;
 
 import com.atguigu.mybatisplus.bean.User;
 import com.atguigu.mybatisplus.mapper.UserMapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -151,9 +152,11 @@ public class MybatisPlusWrapperTest {
         userList.forEach(System.out::println);
     }
 
+    /**
+     * 使用condition组装条件
+     **/
     @Test
     public void test10() {
-        /** 使用condition组装条件 **/
         String name = "a";
         Integer ageStart = 20;
         Integer ageEnd = 34;
@@ -164,6 +167,30 @@ public class MybatisPlusWrapperTest {
                 .le(ageEnd != null, "age", ageEnd);
 
         List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
+
+    /**
+     * LambdaQueryWrapper
+     * 避免字段写错
+     */
+    @Test
+    public void test11() {
+        /*
+        SELECT uid AS id,user_name AS name,age,email,is_deleted FROM t_user
+        WHERE is_deleted=0 AND (user_name LIKE ? AND age <= ?)
+        */
+        String name = "a";
+        Integer ageStart = null;
+        Integer ageEnd = 34;
+        //组装set子句
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        //避免使用字符串表示字段，防止运行时错误
+        lambdaQueryWrapper.like(StringUtils.isNotBlank(name), User::getName, name)
+                .ge(ageStart != null, User::getAge, ageStart)
+                .le(ageEnd != null, User::getAge, ageEnd);
+
+        List<User> userList = userMapper.selectList(lambdaQueryWrapper);
         userList.forEach(System.out::println);
     }
 }
