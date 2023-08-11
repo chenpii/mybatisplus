@@ -150,4 +150,20 @@ public class MybatisPlusWrapperTest {
         List<User> userList = userMapper.selectList(queryWrapper);
         userList.forEach(System.out::println);
     }
+
+    @Test
+    public void test10() {
+        /** 使用condition组装条件 **/
+        String name = "a";
+        Integer ageStart = 20;
+        Integer ageEnd = 34;
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(name), "user_name", name)
+                .ge(ageStart != null, "age", ageStart)
+                .le(ageEnd != null, "age", ageEnd);
+
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 }
