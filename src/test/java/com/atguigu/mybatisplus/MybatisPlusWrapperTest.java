@@ -63,4 +63,28 @@ public class MybatisPlusWrapperTest {
         System.out.println("result:" + result);
 
     }
+
+    /**
+     * 条件优先级  将用户名中包含a并且(年龄大于20或邮箱为null)的用户信息修改
+     **/
+    @Test
+    public void test05() {
+        // lambda中条件优先执行
+        /*
+            UPDATE t_user SET user_name=?, email=?
+            WHERE is_deleted=0 AND (user_name LIKE ? AND (age > ? OR email IS NULL))
+         */
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.like("user_name", "a")
+                .and(i -> i.gt("age", 20)
+                        .or()
+                        .isNull("email"));
+        User user = new User();
+        user.setName("小红");
+        user.setEmail("test2@atguigu.com");
+        int result = userMapper.update(user, userQueryWrapper);
+        System.out.println("result:" + result);
+    }
+
+
 }
