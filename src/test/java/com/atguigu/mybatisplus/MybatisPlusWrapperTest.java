@@ -4,6 +4,7 @@ import com.atguigu.mybatisplus.bean.User;
 import com.atguigu.mybatisplus.mapper.UserMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -125,5 +126,28 @@ public class MybatisPlusWrapperTest {
         userUpdateWrapper.set("user_name", "小兰").set("email", "test08@atguigu.com");//修改的值
         int result = userMapper.update(null, userUpdateWrapper);
         System.out.println("result:" + result);
+    }
+
+    @Test
+    public void test09() {
+        // /** 模拟开发中组装条件的情况  **/
+        //SELECT uid AS id,user_name AS name,age,email,is_deleted FROM t_user WHERE is_deleted=0 AND (age >= ? AND age <= ?)
+        String name = "a";
+        Integer ageStart = 20;
+        Integer ageEnd = 34;
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        if (StringUtils.isNotBlank(name)) {
+            queryWrapper.like("user_name", name);
+        }
+        if (ageStart != null) {
+            queryWrapper.ge("age", ageStart);
+        }
+        if (ageEnd != null) {
+            queryWrapper.le("age", ageEnd);
+        }
+
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
     }
 }
