@@ -1,6 +1,6 @@
 package com.atguigu.mybatisplus;
 
-import com.atguigu.mybatisplus.bean.User;
+import com.atguigu.mybatisplus.pojo.User;
 import com.atguigu.mybatisplus.mapper.UserMapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

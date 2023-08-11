@@ -1,15 +1,13 @@
 package com.atguigu.mybatisplus;
 
-import com.atguigu.mybatisplus.bean.User;
+import com.atguigu.mybatisplus.pojo.User;
 import com.atguigu.mybatisplus.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @SpringBootTest
 public class MyBatisPlusTest {

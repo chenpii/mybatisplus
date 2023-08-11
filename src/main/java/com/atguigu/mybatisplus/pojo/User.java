@@ -1,4 +1,4 @@
-package com.atguigu.mybatisplus.bean;
+package com.atguigu.mybatisplus.pojo;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;

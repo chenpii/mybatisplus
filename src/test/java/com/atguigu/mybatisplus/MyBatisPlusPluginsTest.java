@@ -1,8 +1,7 @@
 package com.atguigu.mybatisplus;
 
-import com.atguigu.mybatisplus.bean.User;
+import com.atguigu.mybatisplus.pojo.User;
 import com.atguigu.mybatisplus.mapper.UserMapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +22,16 @@ public class MyBatisPlusPluginsTest {
         System.out.println(userPage.getTotal()); //总记录数
         System.out.println(userPage.hasNext()); //是否有下一页
         System.out.println(userPage.hasPrevious()); //是否有上一页
+    }
+
+    @Test
+    public void testPageVo() {
+        Page<User> page = new Page<>(1, 3);
+        Page<User> pageVo = userMapper.selectPageVo(page, 20);
+        System.out.println(pageVo.getRecords());
+        System.out.println(pageVo.getPages());
+        System.out.println(pageVo.getTotal());
+        System.out.println(pageVo.hasNext());
+        System.out.println(pageVo.hasPrevious());
     }
 }
