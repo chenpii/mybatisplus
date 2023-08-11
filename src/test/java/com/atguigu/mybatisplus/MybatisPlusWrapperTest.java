@@ -3,6 +3,7 @@ package com.atguigu.mybatisplus;
 import com.atguigu.mybatisplus.bean.User;
 import com.atguigu.mybatisplus.mapper.UserMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -109,5 +110,20 @@ public class MybatisPlusWrapperTest {
         userQueryWrapper.inSql("uid", "select uid from t_user where uid < 100");
         List<User> users = userMapper.selectList(userQueryWrapper);
         users.forEach(System.out::println);
+    }
+
+    /**
+     * 使用UpdateWrapper修改
+     */
+    @Test
+    public void test08() {
+        // 将用户名中包含a并且(年龄大于20或邮箱为null)的用户信息修改
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.like("user_name", "a")
+                .and(i -> i.gt("age", 20).or().isNull("email"));//修改的条件
+
+        userUpdateWrapper.set("user_name", "小兰").set("email", "test08@atguigu.com");//修改的值
+        int result = userMapper.update(null, userUpdateWrapper);
+        System.out.println("result:" + result);
     }
 }
