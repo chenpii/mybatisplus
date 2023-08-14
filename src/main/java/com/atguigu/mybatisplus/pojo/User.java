@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-// @TableName("t_user")
+@TableName("t_user")
 public class User {
 
     // 将属性对应的字段指定为主键
