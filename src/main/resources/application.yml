@@ -24,3 +24,5 @@ mybatis-plus:
       id-type: auto
   # 配置类型别名对应的包
   type-aliases-package: com.atguigu.mybatisplus.pojo
+  # 扫描枚举的包
+  type-enums-package: com.atguigu.mybatisplus.enums

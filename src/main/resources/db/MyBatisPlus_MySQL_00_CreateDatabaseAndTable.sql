@@ -17,6 +17,12 @@ ALTER TABLE mybatis_plus.t_user MODIFY COLUMN uid bigint auto_increment NOT NULL
 ALTER TABLE mybatis_plus.t_user
     ADD is_deleted INT DEFAULT 0 NULL;
 
+ALTER TABLE mybatis_plus.t_user ADD sex INT NULL;
+ALTER TABLE mybatis_plus.t_user MODIFY COLUMN is_deleted int DEFAULT 0 NULL COMMENT '是否删除';
+ALTER TABLE mybatis_plus.t_user MODIFY COLUMN sex int NULL COMMENT '性别';
+
+
+
 -- 商品表
 CREATE TABLE t_product
 (
