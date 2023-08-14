@@ -14,9 +14,9 @@ public class FastAutoGeneratorTest {
         FastAutoGenerator.create("jdbc:mysql://172.16.5.203:3306/mybatis_plus?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false", "root", "Mysql300654=-=3K4i%$")
                 .globalConfig(builder -> {
                     builder.author("atguigu") // 设置作者
-                            // .enableSwagger() // 开启 swagger 模式
-                            .fileOverride() // 覆盖已生成文件
-                            .outputDir(path); // 指定输出目录
+                        // .enableSwagger() // 开启 swagger 模式
+                        .fileOverride() // 覆盖已生成文件
+                        .outputDir(path); // 指定输出目录
                 })
                 .packageConfig(builder -> {
                     builder.parent("com.atguigu") // 设置父包名
@@ -26,7 +26,8 @@ public class FastAutoGeneratorTest {
                 .strategyConfig(builder -> {
                     builder.addInclude("t_user") // 设置需要生成的表名
                             .addTablePrefix("t_", "c_"); // 设置过滤表前缀
-                }).templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker 引擎模板，默认的是Velocity引擎模板
+                })
+                .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker 引擎模板，默认的是Velocity引擎模板
                 .execute();
     }
 
